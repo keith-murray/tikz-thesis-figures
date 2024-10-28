@@ -1,0 +1,34 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{graphicx}
+\usetikzlibrary{positioning}
+
+\colorlet{green_set}{green!70!black}
+\colorlet{purple_set}{blue!80!cyan!60!red!95!black!90}
+\colorlet{red_set}{red!80!black}
+
+\begin{document}
+\begin{tikzpicture}[circle node/.style={circle, thick, draw, minimum size=1cm, inner sep=0pt, outer sep=0pt}]
+
+  % Draw a circle of circles
+  \foreach \angle in {0,45,...,315} {
+    % Determine the fill color based on the angle
+    \pgfmathparse{int(\angle==45 ? 1 : 0)}
+    \ifnum\pgfmathresult>0
+        \node[circle node, fill=green_set] at (\angle:3.0cm) {};
+    \else
+        \node[circle node, fill=red_set] at (\angle:3.0cm) {};
+    \fi
+  }
+
+  % Include the SVG (converted to PDF) in place of the eye
+  \node at (0,0) {\includegraphics[width=1cm, angle=45]{eye.pdf}};
+
+  % Draw the gaze line (optional, purple dashed line)
+  \draw[ultra thick, dashed, purple_set, ->, >=stealth] (0.35,0.35) -- (1.725,1.725);
+  \draw[thick, purple_set] (0.25,-0.1) -- (2.4,-0.1);
+
+  % Draw the arc with labels
+  \draw[thick, purple_set,] (2.0,-0.05) arc[start angle=0, end angle=44, radius=2.cm] node[midway, sloped, above] {$\theta = 45^\circ$};
+
+\end{tikzpicture}
+\end{document}
