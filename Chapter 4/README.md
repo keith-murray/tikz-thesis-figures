@@ -6,7 +6,7 @@ God:
 > You are a finite state machine model of a turnstile.
 
 You:
-> Is it conscious?
+> Does that mean I'm conscious?
 
 God:
 > No.
